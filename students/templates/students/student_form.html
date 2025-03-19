@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 style="text-align: center;">{% if student_form.instance.pk %}Edit{% else %}New{% endif %} Student</h2>
+  <form method="post" style="width: 50%; margin: auto;">
+    {% csrf_token %}
+    <div style="float: left; width: 48%; margin-right: 2%;">
+      <h3>Student Details</h3>
+      <div style="margin-bottom: 10px;">
+        <label for="{{ student_form.name.id_for_label }}" style="display: inline-block; width: 30%;">{{ student_form.name.label }}</label>
+        {{ student_form.name }}
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="{{ student_form.student_class.id_for_label }}" style="display: inline-block; width: 30%;">{{ student_form.student_class.label }}</label>
+        {{ student_form.student_class }}
+      </div>
+    </div>
+    <div style="float: left; width: 48%;">
+      <h3>Marks</h3>
+      <div style="margin-bottom: 10px;">
+        <label for="{{ marks_form.english.id_for_label }}" style="display: inline-block; width: 30%;">{{ marks_form.english.label }}</label>
+        {{ marks_form.english }}
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="{{ marks_form.maths.id_for_label }}" style="display: inline-block; width: 30%;">{{ marks_form.maths.label }}</label>
+        {{ marks_form.maths }}
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="{{ marks_form.physics.id_for_label }}" style="display: inline-block; width: 30%;">{{ marks_form.physics.label }}</label>
+        {{ marks_form.physics }}
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="{{ marks_form.chemistry.id_for_label }}" style="display: inline-block; width: 30%;">{{ marks_form.chemistry.label }}</label>
+        {{ marks_form.chemistry }}
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label for="{{ marks_form.computer.id_for_label }}" style="display: inline-block; width: 30%;">{{ marks_form.computer.label }}</label>
+        {{ marks_form.computer }}
+      </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div style="text-align: right; margin-top: 20px;">
+      <button type="submit" class="button" style="border-radius: 8px;">Save</button>
+    </div>
+  </form>
+<p><a href="{% url 'student_list' %}" class="button">Back to list</a></p>
+{% endblock %}
