@@ -1,0 +1,52 @@
+<!-- students/templates/students/download_report.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 style="text-align: center;">Download Report</h2>
+  <form method="post" action="{% url 'download_report' %}" style="width: 50%; margin: auto;">
+    {% csrf_token %}
+    <div style="text-align: center; display: flex; justify-content: center; align-items: center;">
+      <label for="grade" style="margin-right: 10px;">Select Grade:</label>
+      <select name="grade" id="grade" style="margin-right: 10px;">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="E">E</option>
+        <option value="F">F</option>
+      </select>
+      <button type="submit" class="button" style="border-radius: 8px;">Download</button>
+    </div>
+  </form>
+
+<!-- List of Files in S3 -->
+  <h3 style="text-align: center; margin-top: 30px;">Available Reports</h3>
+  {% if files %}
+    <table border="1" style="width: 100%; margin: auto; border-collapse: collapse; text-align: center;">
+      <tr>
+        <th>File Name</th>
+        <th>Last Modified</th>
+        <th>Download Link</th>
+      </tr>
+      {% for file in files %}
+      <tr>
+        <td>{{ file.name }}</td>
+        <td>{{ file.last_modified }}</td>
+        <td>
+          {% if file.key %}
+            <a href="{% url 'download_s3_file' file.key %}" class="button" title="{{ file.url }}">Download</a>
+          {% else %}
+            <span style="color: red;">Invalid File</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p style="text-align: center; margin-top: 20px;">No reports available.</p>
+  {% endif %}
+
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'student_list' %}" class="button">Back to list</a>
+  </div>
+{% endblock %}
