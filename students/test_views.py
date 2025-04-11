@@ -5,8 +5,6 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from students.models import Student, Marks
 
-#smspostgres
-#B1FXk6wYovmepzyxabDQ
 
 class StudentViewsTestCase(TestCase):
     def setUp(self):
